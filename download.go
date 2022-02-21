@@ -10,6 +10,12 @@ import (
 	"sync"
 )
 
+func createFolders(path string) {
+	os.MkdirAll(path, 0755)
+	os.MkdirAll(path, 0755)
+	os.MkdirAll(path, 0755)
+}
+
 func main() {
 
 	ruc := flag.String("ruc", "", "Ruc/Ruc con indicador usado para crear la carpeta")
@@ -30,6 +36,13 @@ func main() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 
 	log.Println(*ruc, *filename, *db)
+
+	cdr_path := "downloaded/" + *ruc + "/CDR/"
+	ubl_path := "downloaded/" + *ruc + "/XML/"
+	xmldata_path := "downloaded/" + *ruc + "/XMLDATA/"
+	createFolders(cdr_path)
+	createFolders(ubl_path)
+	createFolders(xmldata_path)
 
 	wg := &sync.WaitGroup{}
 

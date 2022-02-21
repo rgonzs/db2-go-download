@@ -13,9 +13,6 @@ func ProcessDocument(idthread int, ruc string, table_name string, pool *go_ibm_d
 	cdr_path := "downloaded/" + ruc + "/CDR/"
 	ubl_path := "downloaded/" + ruc + "/XML/"
 	xmldata_path := "downloaded/" + ruc + "/XMLDATA/"
-	createFolders(cdr_path)
-	createFolders(ubl_path)
-	createFolders(xmldata_path)
 	for id := range jobs {
 		data, err := repository.GetDataFromId(id, table_name, pool)
 		if err != nil {
@@ -37,12 +34,6 @@ func ProcessDocument(idthread int, ruc string, table_name string, pool *go_ibm_d
 		// log.Println("ID procesado ", id)
 		wg.Done()
 	}
-}
-
-func createFolders(path string) {
-	os.MkdirAll(path, 0755)
-	os.MkdirAll(path, 0755)
-	os.MkdirAll(path, 0755)
 }
 
 func writeBytesToFile(filename string, content []byte) {
